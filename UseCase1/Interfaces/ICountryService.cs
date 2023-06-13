@@ -4,6 +4,6 @@ namespace UseCase1.Interfaces
 {
     public interface ICountryService
     {
-        Task<IEnumerable<Country>> GetCountriesAsync();
+        Task<IEnumerable<Country>> GetAllCountriesAsync();
     }
 }

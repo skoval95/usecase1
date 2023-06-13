@@ -5,7 +5,7 @@ namespace UseCase1.Models
     public class Country
     {
         [JsonPropertyName("name")]
-        public CountryName? Name { get; set; }
+        public CountryName Name { get; set; }
 
         [JsonPropertyName("tld")]
         public string[]? Tld { get; set; }
@@ -143,7 +143,7 @@ namespace UseCase1.Models
     public class CountryName
     {
         [JsonPropertyName("common")]
-        public string? Common { get; set; }
+        public string Common { get; set; }
 
         [JsonPropertyName("official")]
         public string? Official { get; set; }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using UseCase1.Interfaces;
 using UseCase1.Models;
+using UseCase1.Services;
 
 namespace UseCase1.Controllers
 {
@@ -20,13 +21,20 @@ namespace UseCase1.Controllers
         }
 
         [HttpGet]
-        public Task<IEnumerable<Country>> Get(
-            [FromQuery] string? name = null,
-            [FromQuery] int? population = null,
-            [FromQuery] string? sort = null,
-            [FromQuery] int? top = null)
+        public async Task<IEnumerable<Country>> Get(
+            [FromQuery(Name = "nameFilter")] string? nameFilter = null,
+            [FromQuery(Name = "population")] int? population = null,
+            [FromQuery(Name = "sort")] string? sort = null,
+            [FromQuery(Name = "top")] int? top = null)
         {
-            return countryService.GetCountriesAsync();
+            var result = await countryService.GetAllCountriesAsync();
+
+            if (!string.IsNullOrWhiteSpace(nameFilter))
+            {
+                result = CountryService.GetFilteredCountriesByName(result, nameFilter);
+            }
+
+            return result;
         }
     }
 }
