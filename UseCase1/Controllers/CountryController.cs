@@ -14,6 +14,9 @@ namespace UseCase1.Controllers
     [Route("api/[controller]")]
     public class CountryController : Controller
     {
+        private const string ascendKeyWord = "ascend";
+        private const string descendKeyWord = "descend";
+
         private readonly ICountryService countryService;
         public CountryController(ICountryService countryService)
         {
@@ -37,6 +40,12 @@ namespace UseCase1.Controllers
             if (population.HasValue)
             {
                 result = CountryService.GetFilteredCountriesByPopulation(result, population.Value);
+            }
+
+            if (!string.IsNullOrWhiteSpace(sort)
+                && (sort.Equals(ascendKeyWord) || sort.Equals(descendKeyWord)))
+            {
+                result = CountryService.GetOrderedCountriesByName(result, sort.Equals(ascendKeyWord));
             }
 
             return result;

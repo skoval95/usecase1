@@ -28,5 +28,8 @@ namespace UseCase1.Services
 
         public static IEnumerable<Country> GetFilteredCountriesByPopulation(IEnumerable<Country> countries, int populationInMillions)
             => countries.Where(c => c.Population < populationInMillions * million);
+
+        public static IEnumerable<Country> GetOrderedCountriesByName(IEnumerable<Country> countries, bool ascend)
+            => ascend ? countries.OrderBy(c => c.Name.Common) : countries.OrderByDescending(c => c.Name.Common);
     }
 }
