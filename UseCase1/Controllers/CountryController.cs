@@ -34,6 +34,11 @@ namespace UseCase1.Controllers
                 result = CountryService.GetFilteredCountriesByName(result, nameFilter);
             }
 
+            if (population.HasValue)
+            {
+                result = CountryService.GetFilteredCountriesByPopulation(result, population.Value);
+            }
+
             return result;
         }
     }

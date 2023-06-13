@@ -7,6 +7,7 @@ namespace UseCase1.Services
 {
     public class CountryService : ICountryService
     {
+        private const int million = 1000000;
         private readonly HttpClient httpClient;
 
         public CountryService(HttpClient httpClient)
@@ -24,5 +25,8 @@ namespace UseCase1.Services
 
         public static IEnumerable<Country> GetFilteredCountriesByName(IEnumerable<Country> countries, string nameFilter)
             => countries.Where(c => c.Name.Common.Contains(nameFilter, StringComparison.InvariantCultureIgnoreCase));
+
+        public static IEnumerable<Country> GetFilteredCountriesByPopulation(IEnumerable<Country> countries, int populationInMillions)
+            => countries.Where(c => c.Population < populationInMillions * million);
     }
 }
