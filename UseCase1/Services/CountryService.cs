@@ -31,5 +31,8 @@ namespace UseCase1.Services
 
         public static IEnumerable<Country> GetOrderedCountriesByName(IEnumerable<Country> countries, bool ascend)
             => ascend ? countries.OrderBy(c => c.Name.Common) : countries.OrderByDescending(c => c.Name.Common);
+
+        public static IEnumerable<Country> GetLimitedNumberOfCountries(IEnumerable<Country> countries, int limit)
+            => countries.Take(limit);
     }
 }

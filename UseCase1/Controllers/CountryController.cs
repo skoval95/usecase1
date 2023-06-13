@@ -25,9 +25,9 @@ namespace UseCase1.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<Country>> Get(
-            [FromQuery(Name = "nameFilter")] string? nameFilter = null,
+            [FromQuery(Name = "nameFilter")] string nameFilter = null,
             [FromQuery(Name = "population")] int? population = null,
-            [FromQuery(Name = "sort")] string? sort = null,
+            [FromQuery(Name = "sort")] string sort = null,
             [FromQuery(Name = "top")] int? top = null)
         {
             var result = await countryService.GetAllCountriesAsync();
@@ -46,6 +46,11 @@ namespace UseCase1.Controllers
                 && (sort.Equals(ascendKeyWord) || sort.Equals(descendKeyWord)))
             {
                 result = CountryService.GetOrderedCountriesByName(result, sort.Equals(ascendKeyWord));
+            }
+
+            if (top.HasValue)
+            {
+                result = CountryService.GetLimitedNumberOfCountries(result, top.Value);
             }
 
             return result;
