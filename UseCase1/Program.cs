@@ -9,6 +9,7 @@ builder.Services.AddHttpClient<ICountryService, CountryService>(c =>
 {
     c.BaseAddress = new Uri("https://restcountries.com/");
 });
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
